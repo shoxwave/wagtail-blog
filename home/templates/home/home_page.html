@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static  wagtailcore_tags  wagtailimages_tags %}
+
+
+
+{% block content %}
+
+    {% if page.get_cta_url %}
+        <a href="{{ page.get_cta_url }}">
+            {{ page.get_cta_url }}
+        </a>
+    {% endif %}
+
+    <h1> {{ page.title }} </h1>
+
+    <h3> {{ page.subtitle }} </h3>
+
+    {% if page.body %}
+        {{ page.body|richtext }}
+    {% endif %}
+
+    <hr>
+    {% comment %} This is the regual image method {% endcomment %}
+    {% comment %} Image stuff below: <br>
+
+    {% image page.image max-320x320 as custom_img %}
+    <img src="/media/images/Kessel_Planet.max-320x320.jpg" alt="Frame">
+    {{ custom_img.url}}
+
+    <br> {% endcomment %}
+
+    {% comment %} This is the orderable method  {% endcomment %}
+    {% for orderable_object in page.gallery_images.all %}
+        {{orderable_object.image }}<br>
+        {% image orderable_object.image max-320x320 as orderable_img %}
+        <img src="{{orderable_img.url}}" alt="gallery">
+    {% endfor %}
+
+{% comment %} This is for custom document  {% endcomment %}
+    {% if page.custom_document%}
+        This is the download url
+        {{ page.custom_document.url }}
+        {{ page.custom_document.title }}
+        {{ page.custom_document.description }}
+
+        <a href="{{ page.custom_document.url }}" download>Download</a>
+    {% endif %}
+
+{% endblock content %}

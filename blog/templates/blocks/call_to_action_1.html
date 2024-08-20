@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+
+<div>
+    <div class="rich-text">
+        {{  self.text|richtext }}
+    </div>
+    <a href="{{ self.page.url }}">
+        {{ button_copy }}
+    </a>
+</div>

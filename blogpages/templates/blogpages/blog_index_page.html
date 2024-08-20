@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags %}
+
+
+{% block content %}
+    Below is the custom context Override
+    {{ posts }}
+
+    <a href="{% routablepageurl page "all" %}">
+        View all Blog posts
+    </a>
+    <br>
+    <a href="{% routablepageurl page "tag" tag="cats" %}">
+        View blog posts filtered by cat
+    </a>
+
+    <h1>{{ page.title }}</h1>
+    <h3>{{ page.subtitle }}</h3>
+
+    <h4>Body is below:</h4>
+    {{ page.body|richtext }}
+
+    <hr>
+    <hr>
+    <hr>
+    
+    <h4>Blog posts are below</h4>
+    {% for blog_post in blogpages %}
+        <a href="{{ blog_post.url }}">
+            {{ blog_post.title }}
+        </a>
+        <p> {{ blog_post.subtitle }} </p>
+        <hr>
+        {% image blog_post.image fill-320x320 as custom_img %}
+        {{blog_post.image}}
+        <img src="{{custom_img.url}}" alt="Frame">
+        {{ custom_img.url}}
+    {% endfor %}
+
+{% endblock %}

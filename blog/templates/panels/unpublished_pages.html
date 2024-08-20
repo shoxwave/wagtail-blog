@@ -1,0 +1,8 @@
+{% load i18n wagtailadmin_tags %}
+
+<li>
+    {% icon name="doc-empty" %}
+    <a href="{% url 'wagtaildocs:index' %}">
+            <span>{{ total }}</span> Unpublished Pages
+    </a>
+</li>

@@ -1,0 +1,6 @@
+header {
+    background-color: grey;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    @apply mb-5 text-white text-center p-4;
+}
